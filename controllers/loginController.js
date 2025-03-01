@@ -12,7 +12,7 @@ const loginExistingUser = async (request,response)=>{
         }
         if(await bcrypt.compare(password,validUser.password))
         {
-            const AUTH_TOKEN = jwt.sign({email : validUser.email}, JWT_TOKEN,{ expiresIn:45})
+            const AUTH_TOKEN = jwt.sign({email : validUser.email}, JWT_TOKEN,{ expiresIn:'7d'})
             return response.status(201).json({token : AUTH_TOKEN, firstName : validUser.firstName, lastName : validUser.lastName})
         }
         response.status(401).json({message : 'Invalid Password'})
