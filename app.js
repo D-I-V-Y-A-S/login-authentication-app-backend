@@ -13,7 +13,17 @@ app.get('/', (request, response) => {
     response.send(`<h1>Hello World!</h1> It's working`)
 })
 
-app.use(cors())
+const corsOptions = {
+  origin: 'https://login-authentication-app-frontend-git-main-d-i-v-y-a-s-projects.vercel.app',
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
+
 app.use(express.json());
 
 mongoose.connect(process.env.DB_URL)
